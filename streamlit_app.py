@@ -4,7 +4,7 @@ from openai import OpenAI
 # 제목과 설명
 st.title("🍽️ 오늘은 뭘 먹을지 물어보세요")
 st.write(
-    "이 챗봇은 GPT-3.5 모델을 활용해, 오늘 점심이나 저녁 메뉴가 고민되는 분들을 위해 맞춤 추천을 도와드립니다. 🍱🍝🍜\n\n"
+    "이 챗봇은 GPT-4o 모델을 활용해, 오늘 점심이나 저녁 메뉴가 고민되는 분들을 위해 맞춤 추천을 도와드립니다. 🍱🍝🍜\n\n"
     "앱을 사용하려면 OpenAI API 키가 필요하며, [여기에서](https://platform.openai.com/account/api-keys) 발급받을 수 있어요."
 )
 
