@@ -46,7 +46,7 @@ else:
 
         # GPT 응답 생성
         stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[SYSTEM_PROMPT] + [
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
