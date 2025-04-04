@@ -1,14 +1,14 @@
 import streamlit as st
 from openai import OpenAI
 
-# 페이지 제목과 설명
+# 제목과 설명
 st.title("🍽️ 오늘은 뭘 먹을지 물어보세요")
 st.write(
     "이 챗봇은 GPT-3.5 모델을 활용해, 오늘 점심이나 저녁 메뉴가 고민되는 분들을 위해 맞춤 추천을 도와드립니다. 🍱🍝🍜\n\n"
     "앱을 사용하려면 OpenAI API 키가 필요하며, [여기에서](https://platform.openai.com/account/api-keys) 발급받을 수 있어요."
 )
 
-# API 키 입력 받기
+# API 키 입력
 openai_api_key = st.text_input("OpenAI API Key", type="password")
 if not openai_api_key:
     st.info("계속하려면 OpenAI API 키를 입력해 주세요.", icon="🗝️")
@@ -16,7 +16,7 @@ else:
     # OpenAI 클라이언트 생성
     client = OpenAI(api_key=openai_api_key)
 
-    # 시스템 역할 메시지 추가
+    # 시스템 프롬프트
     SYSTEM_PROMPT = {
         "role": "system",
         "content": (
@@ -26,18 +26,20 @@ else:
         )
     }
 
-    # 세션 상태에 메시지 저장
+    # 세션 초기화 및 챗봇의 첫 질문
     if "messages" not in st.session_state:
         st.session_state.messages = []
+        # 챗봇이 먼저 말 걸기
+        initial_message = "안녕하세요! 😊 오늘 점심이나 저녁 메뉴로 어떤 음식이 당기시나요?\n한식, 중식, 일식, 양식 중에서 고민 중이신가요?"
+        st.session_state.messages.append({"role": "assistant", "content": initial_message})
 
-    # 이전 대화 메시지 출력
+    # 이전 메시지 출력
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
     # 사용자 입력 받기
     if prompt := st.chat_input("점심이나 저녁 메뉴를 물어보세요!"):
-        # 사용자 메시지 저장 및 출력
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
@@ -52,7 +54,7 @@ else:
             stream=True,
         )
 
-        # GPT 응답 출력 및 저장
+        # 응답 출력 및 저장
         with st.chat_message("assistant"):
             response = st.write_stream(stream)
         st.session_state.messages.append({"role": "assistant", "content": response})
