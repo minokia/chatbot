@@ -2,11 +2,11 @@ import streamlit as st
 from openai import OpenAI
 
 # Show title and description.
-st.title("💬 Chatbot")
+st.title("💬오늘은 뭘 먹을")
 st.write(
-    "This is a simple chatbot that uses OpenAI's GPT-3.5 model to generate responses. "
-    "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
-    "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
+   "이 챗봇은 GPT-3.5 모델을 활용해 오늘 뭐 먹을지 고민하는 분들을 위한 메뉴 추천을 도와드립니다."
+   "앱을 사용하려면 OpenAI API 키가 필요하며, 여기에서 발급받을 수 있어요."
+
 )
 
 # Ask user for their OpenAI API key via `st.text_input`.
